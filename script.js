@@ -18,21 +18,23 @@
     reset() {
       this.x = Math.random() * w;
       this.y = Math.random() * h;
-      this.vx = (Math.random() - 0.5) * 0.4;
-      this.vy = (Math.random() - 0.5) * 0.4;
-      this.radius = Math.random() * 2.2 + 0.6;
-      this.alpha = Math.random() * 0.5 + 0.15;
+      this.vx = (Math.random() - 0.5) * 0.35;
+      this.vy = (Math.random() - 0.5) * 0.35;
+      this.radius = Math.random() * 2 + 0.6;
+      this.alpha = Math.random() * 0.25 + 0.08;
       this.pulseSpeed = Math.random() * 0.015 + 0.005;
       this.pulseOffset = Math.random() * Math.PI * 2;
-      // Color variation — slight blue/purple/cyan tints
-      const hue = 220 + Math.random() * 60;
-      this.color = `hsla(${hue}, 60%, 80%,`;
+      // Subtle blue/purple tints that work on white
+      const hue = 220 + Math.random() * 50;
+      const sat = 30 + Math.random() * 30;
+      const light = 40 + Math.random() * 20;
+      this.color = `hsla(${hue}, ${sat}%, ${light}%,`;
     }
   }
 
   function init() {
     resize();
-    const count = Math.min(Math.floor((w * h) / 4500), 350);
+    const count = Math.min(Math.floor((w * h) / 5000), 300);
     particles = Array.from({ length: count }, () => new Particle());
   }
 
@@ -40,7 +42,6 @@
     ctx.clearRect(0, 0, w, h);
     const t = time * 0.001;
 
-    // Draw particles
     for (let i = 0; i < particles.length; i++) {
       const p = particles[i];
 
@@ -70,14 +71,10 @@
       const pulse = Math.sin(t * p.pulseSpeed * 60 + p.pulseOffset) * 0.3 + 0.7;
       const alpha = p.alpha * pulse;
 
-      // Draw with soft glow
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
       ctx.fillStyle = p.color + alpha + ')';
-      ctx.shadowColor = p.color + '0.3)';
-      ctx.shadowBlur = 8;
       ctx.fill();
-      ctx.shadowBlur = 0;
 
       // Connect nearby particles
       for (let j = i + 1; j < particles.length; j++) {
@@ -85,13 +82,13 @@
         const ddx = p.x - p2.x;
         const ddy = p.y - p2.y;
         const d = ddx * ddx + ddy * ddy;
-        const maxDist = 20000;
+        const maxDist = 18000;
         if (d < maxDist) {
-          const lineAlpha = (1 - d / maxDist) * 0.12;
+          const lineAlpha = (1 - d / maxDist) * 0.07;
           ctx.beginPath();
           ctx.moveTo(p.x, p.y);
           ctx.lineTo(p2.x, p2.y);
-          ctx.strokeStyle = `rgba(160, 170, 255, ${lineAlpha})`;
+          ctx.strokeStyle = `rgba(100, 100, 160, ${lineAlpha})`;
           ctx.lineWidth = 0.5;
           ctx.stroke();
         }
@@ -197,18 +194,18 @@
       const rect = card.getBoundingClientRect();
       const x = (e.clientX - rect.left) / rect.width;
       const y = (e.clientY - rect.top) / rect.height;
-      const rotX = (y - 0.5) * -6;
-      const rotY = (x - 0.5) * 6;
+      const rotX = (y - 0.5) * -5;
+      const rotY = (x - 0.5) * 5;
 
       card.style.transform = `translateY(-6px) scale(1.01) perspective(800px) rotateX(${rotX}deg) rotateY(${rotY}deg)`;
 
-      // Move the specular highlight to follow cursor
       const shine = card.querySelector('.liquid-card-shine');
       if (shine) {
         shine.style.background = `radial-gradient(circle at ${x * 100}% ${y * 100}%,
-          rgba(255,255,255,0.12) 0%,
-          rgba(255,255,255,0.04) 30%,
-          transparent 60%)`;
+          rgba(255,255,255,0.8) 0%,
+          rgba(255,255,255,0.3) 25%,
+          rgba(255,255,255,0.05) 50%,
+          transparent 70%)`;
       }
     });
 
@@ -217,8 +214,8 @@
       const shine = card.querySelector('.liquid-card-shine');
       if (shine) {
         shine.style.background = `linear-gradient(180deg,
-          rgba(255,255,255,0.08) 0%,
-          rgba(255,255,255,0.02) 40%,
+          rgba(255,255,255,0.6) 0%,
+          rgba(255,255,255,0.15) 40%,
           transparent 100%)`;
       }
     });
