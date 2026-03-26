@@ -1,6 +1,6 @@
 /* ===== RESET & BASE ===== */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; overflow-x: hidden; }
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
   background: #fbfbfd;
@@ -267,6 +267,7 @@ a { color: inherit; text-decoration: none; }
   justify-content: center;
   overflow: hidden;
   z-index: 1;
+  max-width: 100vw;
 }
 #hero-canvas {
   position: absolute;
@@ -345,7 +346,7 @@ a { color: inherit; text-decoration: none; }
 }
 
 /* ===== SECTIONS ===== */
-section { position: relative; z-index: 1; }
+section { position: relative; z-index: 1; overflow: hidden; }
 .section-container {
   max-width: 1200px;
   margin: 0 auto;
@@ -376,6 +377,7 @@ section { position: relative; z-index: 1; }
   position: relative;
   max-width: 380px;
   margin: 0 auto;
+  overflow: hidden;
 }
 .carousel-track {
   display: flex;
