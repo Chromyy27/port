@@ -361,6 +361,76 @@
   });
 })();
 
+/* ===== CIPHER / ENCRYPTION TEXT EFFECT ===== */
+(function () {
+  const el = document.getElementById('hero-name');
+  if (!el) return;
+  const original = el.dataset.text;
+  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%&*!?<>{}[]=/\\';
+  const SCRAMBLE_SPEED = 30;
+  const DECODE_DELAY = 40;
+  const HOLD_TIME = 5000;
+  const ENCRYPT_DURATION = 1200;
+
+  function scrambleText(callback) {
+    let iterations = 0;
+    const maxIterations = original.length;
+    const interval = setInterval(() => {
+      el.textContent = original
+        .split('')
+        .map((char, i) => {
+          if (i < iterations) return original[i];
+          return chars[Math.floor(Math.random() * chars.length)];
+        })
+        .join('');
+      iterations += 1 / 3;
+      if (iterations >= maxIterations) {
+        clearInterval(interval);
+        el.textContent = original;
+        if (callback) callback();
+      }
+    }, DECODE_DELAY);
+  }
+
+  function encryptText(callback) {
+    const start = Date.now();
+    const interval = setInterval(() => {
+      const elapsed = Date.now() - start;
+      const progress = Math.min(elapsed / ENCRYPT_DURATION, 1);
+      const scrambledCount = Math.floor(progress * original.length);
+      el.textContent = original
+        .split('')
+        .map((char, i) => {
+          if (i < original.length - scrambledCount) return original[i];
+          return chars[Math.floor(Math.random() * chars.length)];
+        })
+        .join('');
+      if (progress >= 1) {
+        clearInterval(interval);
+        if (callback) callback();
+      }
+    }, SCRAMBLE_SPEED);
+  }
+
+  function loop() {
+    // Decrypt in
+    scrambleText(() => {
+      // Hold readable
+      setTimeout(() => {
+        // Encrypt out
+        encryptText(() => {
+          // Brief scramble pause then restart
+          setTimeout(loop, 400);
+        });
+      }, HOLD_TIME);
+    });
+  }
+
+  // Start with scrambled text immediately
+  el.textContent = Array.from(original).map(() => chars[Math.floor(Math.random() * chars.length)]).join('');
+  setTimeout(loop, 300);
+})();
+
 /* ===== SMOOTH ANCHOR SCROLL ===== */
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', (e) => {
