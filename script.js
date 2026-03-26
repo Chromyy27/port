@@ -302,6 +302,16 @@
       title: 'DeGods',
       tag: 'Blue Chip',
       text: `<p>Detailed breakdown of work coming soon. This section will describe the growth initiatives contributed to, community engagement strategies, and impact on one of Web3's most recognized NFT brands.</p>`
+    },
+    meegos: {
+      title: 'Meegos',
+      tag: 'NFT',
+      text: `<p>Detailed breakdown of work coming soon. This section will cover the growth and marketing support provided, community engagement tactics, and results delivered for the Meegos project.</p>`
+    },
+    exotic: {
+      title: 'Exotic Markets',
+      tag: 'DeFi',
+      text: `<p>Detailed breakdown of work coming soon. This section will outline the marketing and growth strategy executed for Exotic Markets, a structured products protocol in DeFi.</p>`
     }
   };
 
