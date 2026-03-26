@@ -281,7 +281,7 @@
     blocksmith: {
       title: 'Blocksmith Labs',
       tag: 'Solana',
-      text: `<p>Detailed breakdown of work coming soon. This section will include a comprehensive overview of the growth strategy, community building efforts, campaigns executed, metrics achieved, and the overall impact delivered for Blocksmith Labs.</p>`
+      text: `<p>Helped with the core foundation of the Blocksmith Labs product library including Atlas3, Aurus, Raven & More.</p><p>Key contributions:</p><p>• Managing the BSL, Smyths & Meegos NFT communities</p><p>• Handling X / Twitter operations for each page</p><p>• Partnerships with core Solana NFT and DeFi projects</p><p>• Running strategy for the products</p>`
     },
     skyrise: {
       title: 'SkyRise Labs',
