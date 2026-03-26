@@ -708,6 +708,83 @@ section { position: relative; z-index: 1; }
   color: #86868b;
 }
 
+/* ===== CONTACT BRAND THEMES ===== */
+/* Telegram */
+.contact-telegram {
+  background: linear-gradient(135deg, rgba(42,171,238,0.08) 0%, rgba(255,255,255,0.45) 60%);
+  border-color: rgba(42,171,238,0.15);
+}
+.contact-telegram .contact-icon {
+  background: rgba(42,171,238,0.1);
+  border-color: rgba(42,171,238,0.15);
+  color: #2AABEE;
+}
+.contact-telegram:hover {
+  background: linear-gradient(135deg, rgba(42,171,238,0.15) 0%, rgba(255,255,255,0.55) 60%);
+  border-color: rgba(42,171,238,0.25);
+  box-shadow:
+    0 20px 60px rgba(42,171,238,0.1),
+    0 4px 12px rgba(0,0,0,0.04),
+    inset 0 1px 0 rgba(255,255,255,0.9);
+}
+
+/* X / Twitter */
+.contact-x {
+  background: linear-gradient(135deg, rgba(0,0,0,0.06) 0%, rgba(255,255,255,0.45) 60%);
+  border-color: rgba(0,0,0,0.08);
+}
+.contact-x .contact-icon {
+  background: rgba(0,0,0,0.06);
+  border-color: rgba(0,0,0,0.1);
+  color: #000;
+}
+.contact-x:hover {
+  background: linear-gradient(135deg, rgba(0,0,0,0.1) 0%, rgba(255,255,255,0.55) 60%);
+  border-color: rgba(0,0,0,0.15);
+  box-shadow:
+    0 20px 60px rgba(0,0,0,0.08),
+    0 4px 12px rgba(0,0,0,0.04),
+    inset 0 1px 0 rgba(255,255,255,0.9);
+}
+
+/* Discord */
+.contact-discord {
+  background: linear-gradient(135deg, rgba(88,101,242,0.08) 0%, rgba(255,255,255,0.45) 60%);
+  border-color: rgba(88,101,242,0.12);
+}
+.contact-discord .contact-icon {
+  background: rgba(88,101,242,0.1);
+  border-color: rgba(88,101,242,0.15);
+  color: #5865F2;
+}
+.contact-discord:hover {
+  background: linear-gradient(135deg, rgba(88,101,242,0.15) 0%, rgba(255,255,255,0.55) 60%);
+  border-color: rgba(88,101,242,0.25);
+  box-shadow:
+    0 20px 60px rgba(88,101,242,0.1),
+    0 4px 12px rgba(0,0,0,0.04),
+    inset 0 1px 0 rgba(255,255,255,0.9);
+}
+
+/* Email */
+.contact-email {
+  background: linear-gradient(135deg, rgba(234,67,53,0.07) 0%, rgba(255,255,255,0.45) 60%);
+  border-color: rgba(234,67,53,0.1);
+}
+.contact-email .contact-icon {
+  background: rgba(234,67,53,0.08);
+  border-color: rgba(234,67,53,0.12);
+  color: #EA4335;
+}
+.contact-email:hover {
+  background: linear-gradient(135deg, rgba(234,67,53,0.13) 0%, rgba(255,255,255,0.55) 60%);
+  border-color: rgba(234,67,53,0.2);
+  box-shadow:
+    0 20px 60px rgba(234,67,53,0.08),
+    0 4px 12px rgba(0,0,0,0.04),
+    inset 0 1px 0 rgba(255,255,255,0.9);
+}
+
 /* ===== FOOTER ===== */
 footer {
   position: relative;
