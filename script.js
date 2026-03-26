@@ -1,4 +1,4 @@
-/* ===== HERO PARTICLE MESH ANIMATION ===== */
+/* ===== HERO PARTICLE MESH ANIMATION — BOOSTED ===== */
 (function () {
   const canvas = document.getElementById('hero-canvas');
   const ctx = canvas.getContext('2d');
@@ -12,29 +12,26 @@
   }
 
   class Particle {
-    constructor() {
-      this.reset();
-    }
+    constructor() { this.reset(); }
     reset() {
       this.x = Math.random() * w;
       this.y = Math.random() * h;
-      this.vx = (Math.random() - 0.5) * 0.35;
-      this.vy = (Math.random() - 0.5) * 0.35;
-      this.radius = Math.random() * 2 + 0.6;
-      this.alpha = Math.random() * 0.25 + 0.08;
+      this.vx = (Math.random() - 0.5) * 0.5;
+      this.vy = (Math.random() - 0.5) * 0.5;
+      this.radius = Math.random() * 2.5 + 1;
+      this.alpha = Math.random() * 0.45 + 0.15;
       this.pulseSpeed = Math.random() * 0.015 + 0.005;
       this.pulseOffset = Math.random() * Math.PI * 2;
-      // Subtle blue/purple tints that work on white
       const hue = 220 + Math.random() * 50;
-      const sat = 30 + Math.random() * 30;
-      const light = 40 + Math.random() * 20;
+      const sat = 40 + Math.random() * 35;
+      const light = 35 + Math.random() * 25;
       this.color = `hsla(${hue}, ${sat}%, ${light}%,`;
     }
   }
 
   function init() {
     resize();
-    const count = Math.min(Math.floor((w * h) / 5000), 300);
+    const count = Math.min(Math.floor((w * h) / 3500), 400);
     particles = Array.from({ length: count }, () => new Particle());
   }
 
@@ -44,27 +41,24 @@
 
     for (let i = 0; i < particles.length; i++) {
       const p = particles[i];
-
       p.x += p.vx;
       p.y += p.vy;
-
       if (p.x < 0) p.x = w;
       if (p.x > w) p.x = 0;
       if (p.y < 0) p.y = h;
       if (p.y > h) p.y = 0;
 
-      // Mouse interaction
       const dx = p.x - mouse.x;
       const dy = p.y - mouse.y;
       const dist = Math.sqrt(dx * dx + dy * dy);
-      if (dist < 180) {
-        const force = (180 - dist) / 180;
-        if (dist < 70) {
-          p.x += (dx / dist) * force * 2.5;
-          p.y += (dy / dist) * force * 2.5;
+      if (dist < 200) {
+        const force = (200 - dist) / 200;
+        if (dist < 80) {
+          p.x += (dx / dist) * force * 3;
+          p.y += (dy / dist) * force * 3;
         } else {
-          p.x -= (dx / dist) * force * 0.4;
-          p.y -= (dy / dist) * force * 0.4;
+          p.x -= (dx / dist) * force * 0.6;
+          p.y -= (dy / dist) * force * 0.6;
         }
       }
 
@@ -74,27 +68,28 @@
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
       ctx.fillStyle = p.color + alpha + ')';
+      ctx.shadowColor = p.color + '0.3)';
+      ctx.shadowBlur = 6;
       ctx.fill();
+      ctx.shadowBlur = 0;
 
-      // Connect nearby particles
       for (let j = i + 1; j < particles.length; j++) {
         const p2 = particles[j];
         const ddx = p.x - p2.x;
         const ddy = p.y - p2.y;
         const d = ddx * ddx + ddy * ddy;
-        const maxDist = 18000;
+        const maxDist = 22000;
         if (d < maxDist) {
-          const lineAlpha = (1 - d / maxDist) * 0.07;
+          const lineAlpha = (1 - d / maxDist) * 0.14;
           ctx.beginPath();
           ctx.moveTo(p.x, p.y);
           ctx.lineTo(p2.x, p2.y);
-          ctx.strokeStyle = `rgba(100, 100, 160, ${lineAlpha})`;
-          ctx.lineWidth = 0.5;
+          ctx.strokeStyle = `rgba(80, 80, 160, ${lineAlpha})`;
+          ctx.lineWidth = 0.6;
           ctx.stroke();
         }
       }
     }
-
     animId = requestAnimationFrame(draw);
   }
 
@@ -140,24 +135,15 @@
   const navLinks = document.querySelectorAll('.nav-link');
 
   function onScroll() {
-    if (window.scrollY > 50) {
-      nav.classList.add('scrolled');
-    } else {
-      nav.classList.remove('scrolled');
-    }
-
+    nav.classList.toggle('scrolled', window.scrollY > 50);
     let current = '';
     sections.forEach(section => {
-      const top = section.offsetTop - 100;
-      if (window.scrollY >= top) {
+      if (window.scrollY >= section.offsetTop - 100) {
         current = section.getAttribute('id');
       }
     });
     navLinks.forEach(link => {
-      link.classList.remove('active');
-      if (link.getAttribute('href') === '#' + current) {
-        link.classList.add('active');
-      }
+      link.classList.toggle('active', link.getAttribute('href') === '#' + current);
     });
   }
 
@@ -174,21 +160,184 @@
         const parent = entry.target.parentElement;
         const siblings = Array.from(parent.querySelectorAll('[data-reveal]'));
         const idx = siblings.indexOf(entry.target);
-        setTimeout(() => {
-          entry.target.classList.add('revealed');
-        }, idx * 90);
+        setTimeout(() => entry.target.classList.add('revealed'), idx * 90);
         observer.unobserve(entry.target);
       }
     });
   }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-
   els.forEach(el => observer.observe(el));
+})();
+
+/* ===== CAROUSEL ===== */
+(function () {
+  const track = document.getElementById('carousel-track');
+  const slides = track.querySelectorAll('.carousel-slide');
+  const dotsContainer = document.getElementById('carousel-dots');
+  const prevBtn = document.getElementById('carousel-prev');
+  const nextBtn = document.getElementById('carousel-next');
+  const progressBar = document.getElementById('carousel-progress-bar');
+  const total = slides.length;
+  let current = 0;
+  let autoTimer = null;
+  let progressStart = null;
+  let progressAnim = null;
+  const INTERVAL = 4000;
+
+  // Create dots
+  for (let i = 0; i < total; i++) {
+    const dot = document.createElement('button');
+    dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+    dot.setAttribute('aria-label', 'Go to slide ' + (i + 1));
+    dot.addEventListener('click', () => goTo(i));
+    dotsContainer.appendChild(dot);
+  }
+  const dots = dotsContainer.querySelectorAll('.carousel-dot');
+
+  function goTo(index) {
+    current = ((index % total) + total) % total;
+    track.style.transform = `translateX(-${current * 100}%)`;
+    dots.forEach((d, i) => d.classList.toggle('active', i === current));
+    resetAuto();
+  }
+
+  function next() { goTo(current + 1); }
+  function prev() { goTo(current - 1); }
+
+  prevBtn.addEventListener('click', prev);
+  nextBtn.addEventListener('click', next);
+
+  // Swipe support
+  let startX = 0;
+  let dragging = false;
+  track.addEventListener('touchstart', (e) => {
+    startX = e.touches[0].clientX;
+    dragging = true;
+  }, { passive: true });
+  track.addEventListener('touchend', (e) => {
+    if (!dragging) return;
+    dragging = false;
+    const diff = startX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) {
+      diff > 0 ? next() : prev();
+    }
+  });
+
+  // Auto-advance with progress bar
+  function startProgress() {
+    progressStart = Date.now();
+    progressBar.style.transition = 'none';
+    progressBar.style.width = '0%';
+
+    cancelAnimationFrame(progressAnim);
+    function tick() {
+      const elapsed = Date.now() - progressStart;
+      const pct = Math.min((elapsed / INTERVAL) * 100, 100);
+      progressBar.style.width = pct + '%';
+      if (pct < 100) {
+        progressAnim = requestAnimationFrame(tick);
+      }
+    }
+    progressAnim = requestAnimationFrame(tick);
+  }
+
+  function resetAuto() {
+    clearTimeout(autoTimer);
+    cancelAnimationFrame(progressAnim);
+    startProgress();
+    autoTimer = setTimeout(() => {
+      next();
+    }, INTERVAL);
+  }
+
+  // Pause on hover
+  const wrapper = track.closest('.carousel-wrapper');
+  wrapper.addEventListener('mouseenter', () => {
+    clearTimeout(autoTimer);
+    cancelAnimationFrame(progressAnim);
+  });
+  wrapper.addEventListener('mouseleave', resetAuto);
+
+  resetAuto();
+})();
+
+/* ===== PROJECT DETAIL MODAL ===== */
+(function () {
+  const overlay = document.getElementById('modal-overlay');
+  const modalBody = document.getElementById('modal-body');
+  const closeBtn = document.getElementById('modal-close');
+
+  // Placeholder details — replace with real content later
+  const details = {
+    blocksmith: {
+      title: 'Blocksmith Labs',
+      tag: 'Solana',
+      text: `<p>Detailed breakdown of work coming soon. This section will include a comprehensive overview of the growth strategy, community building efforts, campaigns executed, metrics achieved, and the overall impact delivered for Blocksmith Labs.</p>`
+    },
+    skyrise: {
+      title: 'SkyRise Labs',
+      tag: 'Marketing',
+      text: `<p>Detailed breakdown of work coming soon. This section will cover the marketing campaigns, brand positioning strategy, content creation, and measurable results delivered for SkyRise Labs.</p>`
+    },
+    flashtrade: {
+      title: 'Flash Trade',
+      tag: 'DeFi',
+      text: `<p>Detailed breakdown of work coming soon. This section will outline the user acquisition funnels, growth marketing tactics, partnership activations, and KPIs achieved for Flash Trade.</p>`
+    },
+    atlas3: {
+      title: 'Atlas3',
+      tag: 'Tooling',
+      text: `<p>Detailed breakdown of work coming soon. This section will detail the community growth strategy, engagement frameworks, and platform adoption metrics delivered for Atlas3.</p>`
+    },
+    aurus: {
+      title: 'Aurus',
+      tag: 'NFT',
+      text: `<p>Detailed breakdown of work coming soon. This section will cover brand development, marketing execution, launch strategy, and the results achieved for Aurus.</p>`
+    },
+    hoopas: {
+      title: 'The Hoopas',
+      tag: 'NFT',
+      text: `<p>Detailed breakdown of work coming soon. This section will include the full-cycle marketing plan, community management approach, content strategy, and growth metrics for The Hoopas.</p>`
+    },
+    degods: {
+      title: 'DeGods',
+      tag: 'Blue Chip',
+      text: `<p>Detailed breakdown of work coming soon. This section will describe the growth initiatives contributed to, community engagement strategies, and impact on one of Web3's most recognized NFT brands.</p>`
+    }
+  };
+
+  document.querySelectorAll('.detail-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const key = btn.dataset.project;
+      const data = details[key];
+      if (!data) return;
+      modalBody.innerHTML = `
+        <h3>${data.title}</h3>
+        <span class="modal-tag">${data.tag}</span>
+        ${data.text}
+      `;
+      overlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    });
+  });
+
+  function closeModal() {
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  closeBtn.addEventListener('click', closeModal);
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) closeModal();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeModal();
+  });
 })();
 
 /* ===== LIQUID GLASS MOUSE REFRACTION ===== */
 (function () {
   if (!window.matchMedia('(pointer: fine)').matches) return;
-
   document.querySelectorAll('.liquid-card').forEach(card => {
     card.addEventListener('mousemove', (e) => {
       const rect = card.getBoundingClientRect();
@@ -196,27 +345,17 @@
       const y = (e.clientY - rect.top) / rect.height;
       const rotX = (y - 0.5) * -5;
       const rotY = (x - 0.5) * 5;
-
       card.style.transform = `translateY(-6px) scale(1.01) perspective(800px) rotateX(${rotX}deg) rotateY(${rotY}deg)`;
-
       const shine = card.querySelector('.liquid-card-shine');
       if (shine) {
-        shine.style.background = `radial-gradient(circle at ${x * 100}% ${y * 100}%,
-          rgba(255,255,255,0.8) 0%,
-          rgba(255,255,255,0.3) 25%,
-          rgba(255,255,255,0.05) 50%,
-          transparent 70%)`;
+        shine.style.background = `radial-gradient(circle at ${x * 100}% ${y * 100}%, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.3) 25%, rgba(255,255,255,0.05) 50%, transparent 70%)`;
       }
     });
-
     card.addEventListener('mouseleave', () => {
       card.style.transform = '';
       const shine = card.querySelector('.liquid-card-shine');
       if (shine) {
-        shine.style.background = `linear-gradient(180deg,
-          rgba(255,255,255,0.6) 0%,
-          rgba(255,255,255,0.15) 40%,
-          transparent 100%)`;
+        shine.style.background = 'linear-gradient(180deg, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0.15) 40%, transparent 100%)';
       }
     });
   });
