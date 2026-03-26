@@ -175,13 +175,14 @@
   const dotsContainer = document.getElementById('carousel-dots');
   const prevBtn = document.getElementById('carousel-prev');
   const nextBtn = document.getElementById('carousel-next');
-  const progressBar = document.getElementById('carousel-progress-bar');
   const total = slides.length;
   let current = 0;
   let autoTimer = null;
-  let progressStart = null;
-  let progressAnim = null;
-  const INTERVAL = 4000;
+  const INTERVAL = 3000;
+
+  function getSlideWidth() {
+    return slides[0].offsetWidth + 16; // width + gap
+  }
 
   // Create dots
   for (let i = 0; i < total; i++) {
@@ -195,7 +196,7 @@
 
   function goTo(index) {
     current = ((index % total) + total) % total;
-    track.style.transform = `translateX(-${current * 100}%)`;
+    track.style.transform = `translateX(-${current * getSlideWidth()}px)`;
     dots.forEach((d, i) => d.classList.toggle('active', i === current));
     resetAuto();
   }
@@ -222,40 +223,20 @@
     }
   });
 
-  // Auto-advance with progress bar
-  function startProgress() {
-    progressStart = Date.now();
-    progressBar.style.transition = 'none';
-    progressBar.style.width = '0%';
-
-    cancelAnimationFrame(progressAnim);
-    function tick() {
-      const elapsed = Date.now() - progressStart;
-      const pct = Math.min((elapsed / INTERVAL) * 100, 100);
-      progressBar.style.width = pct + '%';
-      if (pct < 100) {
-        progressAnim = requestAnimationFrame(tick);
-      }
-    }
-    progressAnim = requestAnimationFrame(tick);
-  }
-
   function resetAuto() {
     clearTimeout(autoTimer);
-    cancelAnimationFrame(progressAnim);
-    startProgress();
-    autoTimer = setTimeout(() => {
-      next();
-    }, INTERVAL);
+    autoTimer = setTimeout(next, INTERVAL);
   }
 
   // Pause on hover
   const wrapper = track.closest('.carousel-wrapper');
-  wrapper.addEventListener('mouseenter', () => {
-    clearTimeout(autoTimer);
-    cancelAnimationFrame(progressAnim);
-  });
+  wrapper.addEventListener('mouseenter', () => clearTimeout(autoTimer));
   wrapper.addEventListener('mouseleave', resetAuto);
+
+  // Recalc on resize
+  window.addEventListener('resize', () => {
+    track.style.transform = `translateX(-${current * getSlideWidth()}px)`;
+  });
 
   resetAuto();
 })();
