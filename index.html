@@ -6,7 +6,7 @@
   <title>Chromyy — Web3 Growth & Marketing</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=SF+Pro+Display:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -60,118 +60,181 @@
         <p class="section-desc">A selection of Web3 projects I've contributed to — from DeFi protocols to blue-chip NFT communities.</p>
       </div>
 
-      <div class="projects-grid">
-        <div class="project-card liquid-card" data-reveal>
-          <div class="liquid-card-shine"></div>
-          <div class="liquid-card-edge"></div>
-          <div class="project-icon">
-            <svg viewBox="0 0 40 40" width="32" height="32" fill="none">
-              <rect x="4" y="4" width="32" height="32" rx="8" stroke="currentColor" stroke-width="2"/>
-              <path d="M12 20h4l3-6 4 12 3-6h4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
+      <!-- Carousel -->
+      <div class="carousel-wrapper" data-reveal>
+        <div class="carousel-track" id="carousel-track">
+
+          <div class="carousel-slide">
+            <div class="project-card liquid-card">
+              <div class="liquid-card-shine"></div>
+              <div class="liquid-card-edge"></div>
+              <div class="project-icon">
+                <svg viewBox="0 0 40 40" width="32" height="32" fill="none">
+                  <rect x="4" y="4" width="32" height="32" rx="8" stroke="currentColor" stroke-width="2"/>
+                  <path d="M12 20h4l3-6 4 12 3-6h4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <h3>Blocksmith Labs</h3>
+              <p>Growth strategy & community building for one of Solana's leading tool suites.</p>
+              <span class="project-tag">Solana</span>
+              <button class="detail-btn liquid-btn-sm" data-project="blocksmith">View Details</button>
+            </div>
           </div>
-          <h3>Blocksmith Labs</h3>
-          <p>Growth strategy & community building for one of Solana's leading tool suites.</p>
-          <span class="project-tag">Solana</span>
+
+          <div class="carousel-slide">
+            <div class="project-card liquid-card">
+              <div class="liquid-card-shine"></div>
+              <div class="liquid-card-edge"></div>
+              <div class="project-icon">
+                <svg viewBox="0 0 40 40" width="32" height="32" fill="none">
+                  <path d="M20 6l2 8h8l-6.5 5 2.5 8L20 22l-6 5 2.5-8L10 14h8z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                  <path d="M20 6v28" stroke="currentColor" stroke-width="1.5" stroke-dasharray="2 3" opacity="0.4"/>
+                </svg>
+              </div>
+              <h3>SkyRise Labs</h3>
+              <p>Marketing campaigns and brand positioning for an emerging Web3 studio.</p>
+              <span class="project-tag">Marketing</span>
+              <button class="detail-btn liquid-btn-sm" data-project="skyrise">View Details</button>
+            </div>
+          </div>
+
+          <div class="carousel-slide">
+            <div class="project-card liquid-card">
+              <div class="liquid-card-shine"></div>
+              <div class="liquid-card-edge"></div>
+              <div class="project-icon">
+                <svg viewBox="0 0 40 40" width="32" height="32" fill="none">
+                  <path d="M8 28l8-8 4 4 12-12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M24 12h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <h3>Flash Trade</h3>
+              <p>User acquisition and growth marketing for a perpetual DEX on Solana.</p>
+              <span class="project-tag">DeFi</span>
+              <button class="detail-btn liquid-btn-sm" data-project="flashtrade">View Details</button>
+            </div>
+          </div>
+
+          <div class="carousel-slide">
+            <div class="project-card liquid-card">
+              <div class="liquid-card-shine"></div>
+              <div class="liquid-card-edge"></div>
+              <div class="project-icon">
+                <svg viewBox="0 0 40 40" width="32" height="32" fill="none">
+                  <circle cx="20" cy="20" r="14" stroke="currentColor" stroke-width="2"/>
+                  <path d="M20 10v10l7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <circle cx="20" cy="20" r="2" fill="currentColor"/>
+                </svg>
+              </div>
+              <h3>Atlas3</h3>
+              <p>Community growth and engagement strategy for the premier Web3 allowlist platform.</p>
+              <span class="project-tag">Tooling</span>
+              <button class="detail-btn liquid-btn-sm" data-project="atlas3">View Details</button>
+            </div>
+          </div>
+
+          <div class="carousel-slide">
+            <div class="project-card liquid-card">
+              <div class="liquid-card-shine"></div>
+              <div class="liquid-card-edge"></div>
+              <div class="project-icon">
+                <svg viewBox="0 0 40 40" width="32" height="32" fill="none">
+                  <path d="M20 6C12 6 6 12 6 20s6 14 14 14 14-6 14-14S28 6 20 6z" stroke="currentColor" stroke-width="2"/>
+                  <path d="M14 20a6 6 0 0112 0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  <circle cx="20" cy="16" r="3" stroke="currentColor" stroke-width="2"/>
+                </svg>
+              </div>
+              <h3>Aurus</h3>
+              <p>Brand development and marketing execution for a next-gen Web3 project.</p>
+              <span class="project-tag">NFT</span>
+              <button class="detail-btn liquid-btn-sm" data-project="aurus">View Details</button>
+            </div>
+          </div>
+
+          <div class="carousel-slide">
+            <div class="project-card liquid-card">
+              <div class="liquid-card-shine"></div>
+              <div class="liquid-card-edge"></div>
+              <div class="project-icon">
+                <svg viewBox="0 0 40 40" width="32" height="32" fill="none">
+                  <rect x="8" y="14" width="24" height="16" rx="4" stroke="currentColor" stroke-width="2"/>
+                  <path d="M16 14V12a4 4 0 018 0v2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  <circle cx="20" cy="22" r="2" fill="currentColor"/>
+                  <path d="M20 24v3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <h3>The Hoopas</h3>
+              <p>Full-cycle marketing and community management for a standout NFT collection.</p>
+              <span class="project-tag">NFT</span>
+              <button class="detail-btn liquid-btn-sm" data-project="hoopas">View Details</button>
+            </div>
+          </div>
+
+          <div class="carousel-slide">
+            <div class="project-card liquid-card">
+              <div class="liquid-card-shine"></div>
+              <div class="liquid-card-edge"></div>
+              <div class="project-icon">
+                <svg viewBox="0 0 40 40" width="32" height="32" fill="none">
+                  <path d="M20 6l4 8 8 2-6 6 2 8-8-4-8 4 2-8-6-6 8-2z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <h3>DeGods</h3>
+              <p>Contributed to growth initiatives for one of the most recognized NFT brands in Web3.</p>
+              <span class="project-tag">Blue Chip</span>
+              <button class="detail-btn liquid-btn-sm" data-project="degods">View Details</button>
+            </div>
+          </div>
+
+          <div class="carousel-slide">
+            <div class="project-card liquid-card more-card">
+              <div class="liquid-card-shine"></div>
+              <div class="liquid-card-edge"></div>
+              <div class="project-icon">
+                <svg viewBox="0 0 40 40" width="32" height="32" fill="none">
+                  <circle cx="12" cy="20" r="2.5" fill="currentColor"/>
+                  <circle cx="20" cy="20" r="2.5" fill="currentColor"/>
+                  <circle cx="28" cy="20" r="2.5" fill="currentColor"/>
+                </svg>
+              </div>
+              <h3>& Many More</h3>
+              <p>Dozens of additional projects across DeFi, NFTs, DAOs, and Web3 infrastructure.</p>
+              <span class="project-tag">Web3</span>
+            </div>
+          </div>
+
         </div>
-        <div class="project-card liquid-card" data-reveal>
-          <div class="liquid-card-shine"></div>
-          <div class="liquid-card-edge"></div>
-          <div class="project-icon">
-            <svg viewBox="0 0 40 40" width="32" height="32" fill="none">
-              <path d="M20 6l2 8h8l-6.5 5 2.5 8L20 22l-6 5 2.5-8L10 14h8z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-              <path d="M20 6v28" stroke="currentColor" stroke-width="1.5" stroke-dasharray="2 3" opacity="0.4"/>
-            </svg>
-          </div>
-          <h3>SkyRise Labs</h3>
-          <p>Marketing campaigns and brand positioning for an emerging Web3 studio.</p>
-          <span class="project-tag">Marketing</span>
+
+        <!-- Carousel controls -->
+        <div class="carousel-controls">
+          <button class="carousel-arrow carousel-prev" id="carousel-prev" aria-label="Previous">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M12 4l-6 6 6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="carousel-dots" id="carousel-dots"></div>
+          <button class="carousel-arrow carousel-next" id="carousel-next" aria-label="Next">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M8 4l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
         </div>
-        <div class="project-card liquid-card" data-reveal>
-          <div class="liquid-card-shine"></div>
-          <div class="liquid-card-edge"></div>
-          <div class="project-icon">
-            <svg viewBox="0 0 40 40" width="32" height="32" fill="none">
-              <path d="M8 28l8-8 4 4 12-12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M24 12h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </div>
-          <h3>Flash Trade</h3>
-          <p>User acquisition and growth marketing for a perpetual DEX on Solana.</p>
-          <span class="project-tag">DeFi</span>
-        </div>
-        <div class="project-card liquid-card" data-reveal>
-          <div class="liquid-card-shine"></div>
-          <div class="liquid-card-edge"></div>
-          <div class="project-icon">
-            <svg viewBox="0 0 40 40" width="32" height="32" fill="none">
-              <circle cx="20" cy="20" r="14" stroke="currentColor" stroke-width="2"/>
-              <path d="M20 10v10l7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              <circle cx="20" cy="20" r="2" fill="currentColor"/>
-            </svg>
-          </div>
-          <h3>Atlas3</h3>
-          <p>Community growth and engagement strategy for the premier Web3 allowlist platform.</p>
-          <span class="project-tag">Tooling</span>
-        </div>
-        <div class="project-card liquid-card" data-reveal>
-          <div class="liquid-card-shine"></div>
-          <div class="liquid-card-edge"></div>
-          <div class="project-icon">
-            <svg viewBox="0 0 40 40" width="32" height="32" fill="none">
-              <path d="M20 6C12 6 6 12 6 20s6 14 14 14 14-6 14-14S28 6 20 6z" stroke="currentColor" stroke-width="2"/>
-              <path d="M14 20a6 6 0 0112 0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-              <circle cx="20" cy="16" r="3" stroke="currentColor" stroke-width="2"/>
-            </svg>
-          </div>
-          <h3>Aurus</h3>
-          <p>Brand development and marketing execution for a next-gen Web3 project.</p>
-          <span class="project-tag">NFT</span>
-        </div>
-        <div class="project-card liquid-card" data-reveal>
-          <div class="liquid-card-shine"></div>
-          <div class="liquid-card-edge"></div>
-          <div class="project-icon">
-            <svg viewBox="0 0 40 40" width="32" height="32" fill="none">
-              <rect x="8" y="14" width="24" height="16" rx="4" stroke="currentColor" stroke-width="2"/>
-              <path d="M16 14V12a4 4 0 018 0v2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-              <circle cx="20" cy="22" r="2" fill="currentColor"/>
-              <path d="M20 24v3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-            </svg>
-          </div>
-          <h3>The Hoopas</h3>
-          <p>Full-cycle marketing and community management for a standout NFT collection.</p>
-          <span class="project-tag">NFT</span>
-        </div>
-        <div class="project-card liquid-card" data-reveal>
-          <div class="liquid-card-shine"></div>
-          <div class="liquid-card-edge"></div>
-          <div class="project-icon">
-            <svg viewBox="0 0 40 40" width="32" height="32" fill="none">
-              <path d="M20 6l4 8 8 2-6 6 2 8-8-4-8 4 2-8-6-6 8-2z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-            </svg>
-          </div>
-          <h3>DeGods</h3>
-          <p>Contributed to growth initiatives for one of the most recognized NFT brands in Web3.</p>
-          <span class="project-tag">Blue Chip</span>
-        </div>
-        <div class="project-card liquid-card more-card" data-reveal>
-          <div class="liquid-card-shine"></div>
-          <div class="liquid-card-edge"></div>
-          <div class="project-icon">
-            <svg viewBox="0 0 40 40" width="32" height="32" fill="none">
-              <circle cx="12" cy="20" r="2.5" fill="currentColor"/>
-              <circle cx="20" cy="20" r="2.5" fill="currentColor"/>
-              <circle cx="28" cy="20" r="2.5" fill="currentColor"/>
-            </svg>
-          </div>
-          <h3>& Many More</h3>
-          <p>Dozens of additional projects across DeFi, NFTs, DAOs, and Web3 infrastructure.</p>
-          <span class="project-tag">Web3</span>
+
+        <!-- Progress bar -->
+        <div class="carousel-progress">
+          <div class="carousel-progress-bar" id="carousel-progress-bar"></div>
         </div>
       </div>
     </div>
   </section>
+
+  <!-- ======== DETAIL MODAL ======== -->
+  <div class="modal-overlay" id="modal-overlay">
+    <div class="modal liquid-card" id="modal">
+      <div class="liquid-card-shine"></div>
+      <div class="liquid-card-edge"></div>
+      <button class="modal-close" id="modal-close" aria-label="Close">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 5l10 10M15 5L5 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
+      <div class="modal-body" id="modal-body"></div>
+    </div>
+  </div>
 
   <!-- ======== CONTACT ======== -->
   <section id="contact">
