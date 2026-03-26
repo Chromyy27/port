@@ -209,12 +209,12 @@
       if (diff === 0) {
         tx = 0; tz = 0; ry = 0; opacity = 1;
       } else if (absD <= 2) {
-        tx = diff * 200;
-        tz = -absD * 140;
+        tx = diff * 180;
+        tz = -absD * 130;
         ry = sign * -32;
         opacity = absD === 1 ? 0.65 : 0.35;
       } else {
-        tx = sign * 480;
+        tx = sign * 420;
         tz = -400;
         ry = sign * -45;
         opacity = 0;
