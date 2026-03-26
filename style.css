@@ -386,6 +386,63 @@ section { position: relative; z-index: 1; overflow: hidden; }
 .card-glow-wrap {
   position: relative;
   border-radius: 26px;
+  padding: 1.5px;
+  background: rgba(0,0,0,0.06);
+}
+.card-glow-wrap::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: 27px;
+  background: conic-gradient(
+    from var(--border-angle, 0deg) at 50% 50%,
+    transparent 0%,
+    transparent 70%,
+    rgba(120,130,255,0.4) 76%,
+    rgba(100,180,255,0.7) 82%,
+    rgba(160,120,255,0.9) 86%,
+    #a78bfa 88%,
+    rgba(160,120,255,0.9) 90%,
+    rgba(100,180,255,0.7) 94%,
+    rgba(120,130,255,0.4) 97%,
+    transparent 100%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  padding: 1.5px;
+  animation: borderTrace 3.5s linear infinite;
+  pointer-events: none;
+  z-index: 3;
+}
+.card-glow-wrap::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 30px;
+  background: conic-gradient(
+    from var(--border-angle, 0deg) at 50% 50%,
+    transparent 0%,
+    transparent 74%,
+    rgba(120,130,255,0.15) 82%,
+    rgba(160,120,255,0.3) 88%,
+    rgba(120,130,255,0.15) 94%,
+    transparent 100%
+  );
+  filter: blur(6px);
+  pointer-events: none;
+  z-index: 2;
+  animation: borderTrace 3.5s linear infinite;
+}
+@keyframes borderTrace {
+  from { --border-angle: 0deg; }
+  to { --border-angle: 360deg; }
+}
+@property --border-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
 }
 
 .project-card {
