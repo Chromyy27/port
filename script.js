@@ -355,31 +355,6 @@
   });
 })();
 
-/* ===== LIQUID GLASS MOUSE REFRACTION ===== */
-(function () {
-  if (!window.matchMedia('(pointer: fine)').matches) return;
-  document.querySelectorAll('.liquid-card').forEach(card => {
-    card.addEventListener('mousemove', (e) => {
-      const rect = card.getBoundingClientRect();
-      const x = (e.clientX - rect.left) / rect.width;
-      const y = (e.clientY - rect.top) / rect.height;
-      const rotX = (y - 0.5) * -5;
-      const rotY = (x - 0.5) * 5;
-      card.style.transform = `translateY(-6px) scale(1.01) perspective(800px) rotateX(${rotX}deg) rotateY(${rotY}deg)`;
-      const shine = card.querySelector('.liquid-card-shine');
-      if (shine) {
-        shine.style.background = `radial-gradient(circle at ${x * 100}% ${y * 100}%, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.3) 25%, rgba(255,255,255,0.05) 50%, transparent 70%)`;
-      }
-    });
-    card.addEventListener('mouseleave', () => {
-      card.style.transform = '';
-      const shine = card.querySelector('.liquid-card-shine');
-      if (shine) {
-        shine.style.background = 'linear-gradient(180deg, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0.15) 40%, transparent 100%)';
-      }
-    });
-  });
-})();
 
 /* ===== CIPHER / ENCRYPTION TEXT EFFECT ===== */
 (function () {

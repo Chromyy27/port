@@ -140,44 +140,9 @@ a { color: inherit; text-decoration: none; }
     0 1px 3px rgba(0,0,0,0.04);
 }
 
-/* Specular highlight — top edge light refraction */
-.liquid-card-shine {
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 50%;
-  background: linear-gradient(180deg,
-    rgba(255,255,255,0.5) 0%,
-    rgba(255,255,255,0.1) 40%,
-    transparent 100%);
-  pointer-events: none;
-  z-index: 1;
-  border-radius: 24px 24px 0 0;
-}
-
-/* Prismatic edge glow — only on contact cards */
+.liquid-card-shine,
 .liquid-card-edge {
   display: none;
-}
-.contact-card .liquid-card-edge {
-  display: block;
-  position: absolute;
-  inset: -1px;
-  border-radius: 25px;
-  background: linear-gradient(135deg,
-    rgba(255,255,255,0.9) 0%,
-    rgba(120,180,255,0.2) 25%,
-    rgba(200,130,255,0.15) 50%,
-    rgba(100,220,255,0.2) 75%,
-    rgba(255,255,255,0.8) 100%);
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  padding: 1px;
-  pointer-events: none;
-  z-index: 2;
-  opacity: 0.4;
-  transition: opacity 0.5s ease;
 }
 
 .liquid-card:hover {
@@ -186,9 +151,6 @@ a { color: inherit; text-decoration: none; }
   box-shadow:
     0 20px 60px rgba(0,0,0,0.08),
     0 4px 12px rgba(0,0,0,0.05);
-}
-.contact-card:hover .liquid-card-edge {
-  opacity: 0.8;
 }
 
 /* ===== LIQUID GLASS PILL ===== */
