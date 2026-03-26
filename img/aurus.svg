@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <rect width="400" height="400" rx="80" fill="#f9c922"/>
+  <!-- Arrow shape - rounded black -->
+  <g transform="translate(100, 100)">
+    <path d="
+      M 30,200
+      L 30,50
+      Q 30,30 50,30
+      L 170,30
+      L 170,0
+      L 210,45
+      L 170,90
+      L 170,65
+      L 65,65
+      L 65,200
+      Z
+    " fill="#1a1a1a" stroke="none"/>
+    <!-- Rounded corners illusion via layering -->
+    <rect x="30" y="155" width="35" height="50" rx="5" fill="#1a1a1a"/>
+    <rect x="30" y="30" width="35" height="40" rx="0" fill="#1a1a1a"/>
+  </g>
+</svg>
