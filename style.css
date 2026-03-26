@@ -383,48 +383,9 @@ section { position: relative; z-index: 1; overflow: hidden; }
   flex-shrink: 0;
 }
 
-/* ===== ORBITING BORDER ANIMATION ===== */
 .card-glow-wrap {
   position: relative;
   border-radius: 26px;
-  padding: 2px;
-}
-.card-glow-wrap::before {
-  content: '';
-  position: absolute;
-  inset: -2px;
-  border-radius: 28px;
-  background: conic-gradient(
-    from var(--glow-angle, 315deg),
-    transparent 0%,
-    transparent 60%,
-    rgba(0,0,0,0.08) 68%,
-    rgba(0,0,0,0.25) 74%,
-    rgba(0,0,0,0.6) 80%,
-    rgba(0,0,0,0.9) 85%,
-    rgba(0,0,0,0.6) 90%,
-    rgba(0,0,0,0.25) 94%,
-    rgba(0,0,0,0.08) 97%,
-    transparent 100%
-  );
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  padding: 2px;
-  animation: orbitBorder 3s linear infinite;
-  pointer-events: none;
-  z-index: 3;
-}
-@keyframes orbitBorder {
-  from { --glow-angle: 315deg; }
-  to { --glow-angle: 675deg; }
-}
-
-@property --glow-angle {
-  syntax: "<angle>";
-  initial-value: 315deg;
-  inherits: false;
 }
 
 .project-card {
