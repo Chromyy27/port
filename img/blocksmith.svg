@@ -1,25 +1,32 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
   <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#1a0a2e"/>
-      <stop offset="50%" stop-color="#16082a"/>
+    <linearGradient id="bg" x1="0.5" y1="0" x2="0.5" y2="1">
+      <stop offset="0%" stop-color="#0c0618"/>
+      <stop offset="45%" stop-color="#1a0a2e"/>
+      <stop offset="75%" stop-color="#6b1548"/>
       <stop offset="100%" stop-color="#c2185b"/>
     </linearGradient>
+    <clipPath id="roundedRect">
+      <rect width="400" height="400" rx="80"/>
+    </clipPath>
   </defs>
-  <rect width="400" height="400" rx="80" fill="url(#bg)"/>
-  <!-- Hexagon shape with circle cutout -->
-  <g transform="translate(200,200)">
+  <g clip-path="url(#roundedRect)">
+    <rect width="400" height="400" fill="url(#bg)"/>
+    <!-- Subtle pink glow at bottom -->
+    <ellipse cx="200" cy="380" rx="220" ry="120" fill="rgba(194,24,91,0.2)" />
+  </g>
+  <g transform="translate(200,190)" fill="white" clip-path="url(#roundedRect)">
     <!-- Top chevron -->
-    <path d="M0-90 L60-50 L0-25 L-60-50 Z" fill="white"/>
-    <!-- Left arm -->
-    <path d="M-60-45 L-95 10 L-60 55 L-35 15 Q-35-10 -35-10 Z" fill="white"/>
+    <path d="M0-95 L50-60 L38-48 L0-72 L-38-48 L-50-60 Z"/>
     <!-- Right arm -->
-    <path d="M60-45 L95 10 L60 55 L35 15 Q35-10 35-10 Z" fill="white"/>
-    <!-- Bottom -->
-    <path d="M-55 60 L0 95 L55 60 L30 40 Q0 55 -30 40 Z" fill="white"/>
-    <!-- Center circle (dark cutout) -->
-    <circle cx="0" cy="15" r="35" fill="#1a0a2e"/>
-    <!-- Small circle highlight -->
-    <circle cx="0" cy="40" r="18" fill="white"/>
+    <path d="M52-52 L72-30 L78 10 L72 50 L52 68 L42 55 L56 42 L62 10 L56-22 L42-38 Z"/>
+    <!-- Left arm -->
+    <path d="M-52-52 L-72-30 L-78 10 L-72 50 L-52 68 L-42 55 L-56 42 L-62 10 L-56-22 L-42-38 Z"/>
+    <!-- Bottom blob -->
+    <circle cx="0" cy="58" r="26"/>
+    <!-- Cut out the center circle -->
+    <circle cx="0" cy="10" r="42" fill="#0c0618"/>
+    <!-- Re-draw bottom blob on top of cutout -->
+    <circle cx="0" cy="52" r="24"/>
   </g>
 </svg>
