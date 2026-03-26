@@ -386,6 +386,70 @@ section { position: relative; z-index: 1; }
   min-width: 100%;
   padding: 0 8px;
 }
+
+/* ===== ORBITING GLOW BORDER ===== */
+.card-glow-wrap {
+  position: relative;
+  border-radius: 26px;
+  padding: 2px;
+}
+.card-glow-wrap::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 28px;
+  background: conic-gradient(
+    from var(--glow-angle, 0deg),
+    transparent 0%,
+    transparent 35%,
+    rgba(0,0,0,0.5) 45%,
+    rgba(0,0,0,0.8) 50%,
+    rgba(0,0,0,0.5) 55%,
+    transparent 65%,
+    transparent 100%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  padding: 2px;
+  animation: orbitGlow 3s linear infinite;
+  pointer-events: none;
+  z-index: 3;
+  filter: blur(1px);
+}
+/* The orbiting ball */
+.card-glow-wrap::after {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: radial-gradient(circle, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 50%, transparent 70%);
+  border-radius: 50%;
+  z-index: 4;
+  pointer-events: none;
+  box-shadow: 0 0 12px 4px rgba(0,0,0,0.3), 0 0 24px 8px rgba(0,0,0,0.15);
+  animation: orbitBall 3s linear infinite;
+  offset-path: inset(0% round 26px);
+  offset-distance: 0%;
+}
+
+@keyframes orbitGlow {
+  from { --glow-angle: 0deg; }
+  to { --glow-angle: 360deg; }
+}
+
+@keyframes orbitBall {
+  from { offset-distance: 0%; }
+  to { offset-distance: 100%; }
+}
+
+@property --glow-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
 .project-card {
   padding: 32px 28px;
   display: flex;
