@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <defs>
+    <linearGradient id="hbg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#4fc3f7"/>
+      <stop offset="100%" stop-color="#29b6f6"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="400" rx="80" fill="url(#hbg)"/>
+  <!-- "The" text -->
+  <text x="80" y="175" font-family="Arial Black, Arial, sans-serif" font-weight="900" font-size="42" fill="white" font-style="italic">The</text>
+  <!-- "HOOPAS" main text -->
+  <text x="55" y="260" font-family="Arial Black, Impact, sans-serif" font-weight="900" font-size="72" fill="white" letter-spacing="2">HOOPAS</text>
+  <!-- "PXL" subtitle -->
+  <text x="305" y="295" font-family="Arial, sans-serif" font-weight="700" font-size="28" fill="rgba(255,255,255,0.7)" letter-spacing="4">PXL</text>
+  <!-- Decorative flower/plant on top -->
+  <g transform="translate(95, 110)">
+    <line x1="0" y1="0" x2="0" y2="40" stroke="white" stroke-width="2.5" opacity="0.7"/>
+    <ellipse cx="-8" cy="-5" rx="6" ry="10" fill="#ec407a" transform="rotate(-30, -8, -5)"/>
+    <ellipse cx="8" cy="-8" rx="5" ry="9" fill="#f48fb1" transform="rotate(20, 8, -8)"/>
+  </g>
+  <!-- Decorative crystal on right -->
+  <g transform="translate(330, 130)">
+    <polygon points="0,-15 8,0 0,20 -8,0" fill="#7c4dff" opacity="0.7"/>
+    <polygon points="5,-12 12,2 5,15" fill="#b388ff" opacity="0.5"/>
+  </g>
+</svg>
