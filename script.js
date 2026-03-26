@@ -168,36 +168,49 @@
   els.forEach(el => observer.observe(el));
 })();
 
-/* ===== CAROUSEL ===== */
+/* ===== CAROUSEL — CONTINUOUS SMOOTH SCROLL ===== */
 (function () {
   const track = document.getElementById('carousel-track');
   const slides = track.querySelectorAll('.carousel-slide');
   const dotsContainer = document.getElementById('carousel-dots');
   const prevBtn = document.getElementById('carousel-prev');
   const nextBtn = document.getElementById('carousel-next');
+  const wrapper = track.closest('.carousel-wrapper');
   const total = slides.length;
   let current = 0;
+  let offset = 0;
+  let targetOffset = 0;
+  let animFrame = null;
+  let paused = false;
   let autoTimer = null;
-  const INTERVAL = 3000;
+  const AUTO_INTERVAL = 3500;
+  const LERP_SPEED = 0.06;
 
-  function getSlideWidth() {
-    return slides[0].offsetWidth + 16; // width + gap
+  function getGap() {
+    return window.innerWidth <= 768 ? 10 : 16;
+  }
+
+  function getSlideW() {
+    return slides[0].offsetWidth + getGap();
   }
 
   // Create dots
   for (let i = 0; i < total; i++) {
     const dot = document.createElement('button');
     dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
-    dot.setAttribute('aria-label', 'Go to slide ' + (i + 1));
     dot.addEventListener('click', () => goTo(i));
     dotsContainer.appendChild(dot);
   }
   const dots = dotsContainer.querySelectorAll('.carousel-dot');
 
+  function updateDots() {
+    dots.forEach((d, i) => d.classList.toggle('active', i === current));
+  }
+
   function goTo(index) {
     current = ((index % total) + total) % total;
-    track.style.transform = `translateX(-${current * getSlideWidth()}px)`;
-    dots.forEach((d, i) => d.classList.toggle('active', i === current));
+    targetOffset = current * getSlideW();
+    updateDots();
     resetAuto();
   }
 
@@ -207,37 +220,53 @@
   prevBtn.addEventListener('click', prev);
   nextBtn.addEventListener('click', next);
 
-  // Swipe support
-  let startX = 0;
-  let dragging = false;
+  // Swipe
+  let startX = 0, swiping = false;
   track.addEventListener('touchstart', (e) => {
     startX = e.touches[0].clientX;
-    dragging = true;
+    swiping = true;
   }, { passive: true });
   track.addEventListener('touchend', (e) => {
-    if (!dragging) return;
-    dragging = false;
+    if (!swiping) return;
+    swiping = false;
     const diff = startX - e.changedTouches[0].clientX;
-    if (Math.abs(diff) > 50) {
-      diff > 0 ? next() : prev();
-    }
+    if (Math.abs(diff) > 50) diff > 0 ? next() : prev();
   });
+
+  // Smooth lerp animation loop
+  function animate() {
+    if (!paused) {
+      offset += (targetOffset - offset) * LERP_SPEED;
+      // Snap when close enough
+      if (Math.abs(targetOffset - offset) < 0.5) offset = targetOffset;
+    }
+    track.style.transform = `translateX(-${offset}px)`;
+    animFrame = requestAnimationFrame(animate);
+  }
 
   function resetAuto() {
     clearTimeout(autoTimer);
-    autoTimer = setTimeout(next, INTERVAL);
+    autoTimer = setTimeout(next, AUTO_INTERVAL);
   }
 
   // Pause on hover
-  const wrapper = track.closest('.carousel-wrapper');
-  wrapper.addEventListener('mouseenter', () => clearTimeout(autoTimer));
-  wrapper.addEventListener('mouseleave', resetAuto);
+  wrapper.addEventListener('mouseenter', () => {
+    paused = true;
+    clearTimeout(autoTimer);
+  });
+  wrapper.addEventListener('mouseleave', () => {
+    paused = false;
+    resetAuto();
+  });
 
   // Recalc on resize
   window.addEventListener('resize', () => {
-    track.style.transform = `translateX(-${current * getSlideWidth()}px)`;
+    targetOffset = current * getSlideW();
+    offset = targetOffset;
   });
 
+  // Start
+  animate();
   resetAuto();
 })();
 
