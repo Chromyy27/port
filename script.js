@@ -192,7 +192,7 @@
 
   // Position all cards with CSS transitions
   cards.forEach(card => {
-    card.style.transition = 'transform 0.8s cubic-bezier(0.23,1,0.32,1), opacity 0.6s ease';
+    card.style.transition = 'transform 1s cubic-bezier(0.16,1,0.3,1), opacity 0.7s ease, filter 0.7s ease, box-shadow 0.7s ease';
     card.style.position = 'absolute';
     card.style.left = '0';
     card.style.top = '0';
@@ -204,24 +204,42 @@
       const absD = Math.abs(diff);
       const sign = diff > 0 ? 1 : -1;
 
-      let tx, tz, ry, opacity;
+      let tx, tz, ry, opacity, blur, shadow;
 
       if (diff === 0) {
-        tx = 0; tz = 0; ry = 0; opacity = 1;
-      } else if (absD <= 2) {
-        tx = diff * 180;
-        tz = -absD * 130;
-        ry = sign * -32;
-        opacity = absD === 1 ? 0.65 : 0.35;
+        // Center — front and clear
+        tx = 0; tz = 60; ry = 0; opacity = 1; blur = 0;
+        shadow = '0 24px 60px rgba(0,0,0,0.12), 0 8px 20px rgba(0,0,0,0.06)';
+      } else if (absD === 1) {
+        // Immediate neighbors — angled, slightly blurred
+        tx = sign * 200;
+        tz = -60;
+        ry = sign * -40;
+        opacity = 0.75;
+        blur = 1;
+        shadow = '0 12px 30px rgba(0,0,0,0.08)';
+      } else if (absD === 2) {
+        // Second neighbors — deeper, more blurred
+        tx = sign * 340;
+        tz = -180;
+        ry = sign * -50;
+        opacity = 0.4;
+        blur = 2.5;
+        shadow = '0 6px 16px rgba(0,0,0,0.05)';
       } else {
-        tx = sign * 420;
-        tz = -400;
-        ry = sign * -45;
+        // Far away — hidden
+        tx = sign * 450;
+        tz = -300;
+        ry = sign * -55;
         opacity = 0;
+        blur = 4;
+        shadow = 'none';
       }
 
       card.style.transform = `translateX(${tx}px) translateZ(${tz}px) rotateY(${ry}deg)`;
       card.style.opacity = opacity;
+      card.style.filter = blur > 0 ? `blur(${blur}px)` : 'none';
+      card.style.boxShadow = shadow;
       card.style.zIndex = total - absD;
       card.style.pointerEvents = diff === 0 ? 'auto' : 'none';
     });
